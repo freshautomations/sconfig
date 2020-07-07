@@ -1,0 +1,5 @@
+myfakeint = "1"
+myint = 3
+myintlist = [1,2,3]
+mystring = "bye"
+mystringlist = ["hello","goodbye"]

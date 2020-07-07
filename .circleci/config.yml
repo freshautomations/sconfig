@@ -1,0 +1,65 @@
+version: 2.1
+
+# Required in CircleCI: GITHUB_USERNAME, GITHUB_TOKEN
+
+# reusable commands
+commands:
+  test:
+    steps:
+      - run:
+          name: Test
+          command: |
+            go test ./...
+  release:
+    steps:
+      - run:
+          name: Release
+          command: |
+            CGO_ENABLED=0 GOOS=darwin  GOARCH=386   go build -ldflags "-extldflags static" -o build/sconfig_darwin_386 .
+            CGO_ENABLED=0 GOOS=darwin  GOARCH=amd64 go build -ldflags "-extldflags static" -o build/sconfig_darwin_amd64 .
+            CGO_ENABLED=0 GOOS=linux   GOARCH=386   go build -ldflags "-extldflags static" -o build/sconfig_linux_386 .
+            CGO_ENABLED=0 GOOS=linux   GOARCH=amd64 go build -ldflags "-extldflags static" -o build/sconfig_linux_amd64 .
+            CGO_ENABLED=0 GOOS=windows GOARCH=386   go build -ldflags "-extldflags static" -o build/sconfig_windows_386 .
+            CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -ldflags "-extldflags static" -o build/sconfig_windows_amd64 .
+            /bin/bash .circleci/release.bash
+
+# a reusable executor
+executors:
+  go:
+    docker:
+      - image: golang
+    environment:
+      GO111MODULE=on
+
+jobs:
+  test:
+    executor: go
+    steps:
+      - checkout
+      - test
+  release:
+    executor: go
+    steps:
+      - checkout
+      - release
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only:
+                - /^v.*/
+      - release:
+          requires:
+            - test
+          filters:
+            tags:
+              only:
+                - /^v.*/
+            branches:
+              ignore:
+                - /.*/
+

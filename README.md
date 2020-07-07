@@ -20,11 +20,11 @@ Check the [releases](https://github.com/freshautomations/sconfig/releases) page.
 ## How to build it from source
 Install [Golang](https://golang.org/doc/install), then run:
 ```bash
-go get github.com/freshautomations/sconfig.git
+go get github.com/freshautomations/sconfig
 ```
 
 ## How to use
-```bash
+```
 Usage:
   sconfig <filename> <key=value> [<key=value>] ... [flags]
 

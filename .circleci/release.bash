@@ -15,6 +15,7 @@ fi
 
 # Get stoml as jq alternative
 wget -O ./stoml https://github.com/freshautomations/stoml/releases/download/v0.4.0/stoml_linux_amd64
+chmod 755 ./stoml
 
 # Create GitHub release draft
 draftdata="

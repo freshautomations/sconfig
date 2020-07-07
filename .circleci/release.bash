@@ -13,6 +13,9 @@ if [[ -z "$TAG" ]]; then
   exit 1
 fi
 
+# Get stoml as jq alternative
+wget -O ./stoml https://github.com/freshautomations/stoml/releases/download/v0.4.0/stoml_linux_amd64
+
 # Create GitHub release draft
 draftdata="
 {
@@ -31,7 +34,7 @@ if [[ $ERR -ne 0 ]]; then
   exit $ERR
 fi
 
-export id="`jq -r .id draft.json`"
+export id="`./stoml draft.json id`"
 if [ -z "$id" ]; then
   echo "ERROR: Could not get draft id."
   exit 1
@@ -55,7 +58,7 @@ if [[ $ERR -ne 0 ]]; then
   exit $ERR
 fi
 
-export uid="`jq -r .id upload.json`"
+export uid="`./stoml upload.json id`"
 if [ -z "$uid" ]; then
   echo "ERROR: Could not get upload id for binary ${binary}."
   exit 1

@@ -45,7 +45,7 @@ echo "Release ID: ${id}"
 
 # Upload binaries
 
-for binary in sconfig_darwin_386 sconfig_darwin_amd64 sconfig_linux_386 sconfig_linux_amd64 sconfig_windows_386 sconfig_windows_amd64
+for binary in sconfig_darwin_386 sconfig_darwin_amd64 sconfig_darwin_arm64 sconfig_linux_386 sconfig_linux_amd64 sconfig_windows_386 sconfig_windows_amd64
 do
 echo -ne "Processing ${binary}... "
 if [[ ! -f "build/${binary}" ]]; then

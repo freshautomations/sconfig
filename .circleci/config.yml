@@ -15,7 +15,6 @@ commands:
       - run:
           name: Release
           command: |
-            CGO_ENABLED=0 GOOS=darwin  GOARCH=386   go build -ldflags "-extldflags static" -o build/sconfig_darwin_386 .
             CGO_ENABLED=0 GOOS=darwin  GOARCH=amd64 go build -ldflags "-extldflags static" -o build/sconfig_darwin_amd64 .
             CGO_ENABLED=0 GOOS=darwin  GOARCH=arm64 go build -ldflags "-extldflags static" -o build/sconfig_darwin_arm64 .
             CGO_ENABLED=0 GOOS=linux   GOARCH=386   go build -ldflags "-extldflags static" -o build/sconfig_linux_386 .

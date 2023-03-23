@@ -20,7 +20,7 @@ Check the [releases](https://github.com/freshautomations/sconfig/releases) page.
 ## How to build it from source
 Install [Golang](https://golang.org/doc/install), then run:
 ```bash
-go get github.com/freshautomations/sconfig
+go install github.com/freshautomations/sconfig@latest
 ```
 
 ## How to use
